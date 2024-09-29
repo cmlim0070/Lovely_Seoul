@@ -1,0 +1,12 @@
+.kakaomap {
+  width: 1000px;
+  height: 100%;
+  background-color: bisque;
+  box-sizing: border-box;
+  border-radius: 10%;
+  overflow: hidden;
+}
+
+.__react-kakao-maps-sdk___Map {
+  border-radius: 10%;
+}/*# sourceMappingURL=KakaoMap.css.map */

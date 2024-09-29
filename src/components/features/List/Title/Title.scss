@@ -1,0 +1,14 @@
+@import "../../../../variable.scss";
+
+.title {
+    padding: 3rem 0 3rem 0;
+}
+
+.title__main {
+    @include h2-style;
+}
+
+.title__desc {
+    @include p-style;
+    padding: $padding-thin 0 $padding-thin 0;
+}

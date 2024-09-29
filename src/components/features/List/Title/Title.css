@@ -1,0 +1,16 @@
+.title {
+  padding: 3rem 0 3rem 0;
+}
+
+.title__main {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.title__desc {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0.5rem 0 0.5rem 0;
+}/*# sourceMappingURL=Title.css.map */

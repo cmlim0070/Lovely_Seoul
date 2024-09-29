@@ -1,0 +1,7 @@
+section {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+}/*# sourceMappingURL=Layout.css.map */

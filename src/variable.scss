@@ -1,0 +1,110 @@
+// 컬러파레트
+$seoul-blue: #0087ca;
+$favorite-red: #bc1238;
+
+$age-10: #ffafa3;
+$age-20: #ffc470;
+$age-30: #ffd966;
+$age-40: #85e0a3;
+$age-50: #80caff;
+$age-60: #d9b8ff;
+
+$gender-boy: #2b67f6 alpha 10%;
+$gender-girl: #f65751 alpha 10%;
+
+$light-gray: #bdbdbd;
+$light-gray2: #979797;
+$deep-gray: #333333;
+
+$Congestion-1: #dd1f3d;
+$Congestion-2: #ff8040;
+$Congestion-3: #ffb100;
+$Congestion-4: #00d369;
+
+//폰트
+$font-nanum-gothic: "Nanum Gothic", sans-serif;
+$font-do-hyeon: "Do Hyeon", sans-serif;
+$font-noto-sans-kr: "Noto Sans KR", sans-serif;
+
+$MaxExtraLarge: 36px;
+$ExtraLarge: 28px;
+$Large: 26px;
+$Medium: 16px;
+$Small: 14px;
+$Micro: 12px;
+
+$Bold: 900;
+$Regular: 400;
+$Thin: 300;
+
+//여백
+$radius-default: 20px;
+$raduis-thin: 10px;
+$radius-circle: 50%;
+
+$padding-default: 1rem;
+$padding-thin: 0.5rem;
+$padding-thick: 1.5rem;
+$padding-thicker: 2rem;
+
+@mixin h2-style {
+    font-family: $font-nanum-gothic;
+    font-size: $ExtraLarge;
+    font-weight: $Bold;
+}
+
+@mixin h3-style {
+    font-family: $font-do-hyeon;
+    font-size: $Large;
+    font-weight: $Regular;
+}
+
+@mixin p-style {
+    font-family: $font-noto-sans-kr;
+    font-size: $Medium;
+    font-weight: $Thin;
+}
+
+@mixin span-style {
+    font-family: $font-noto-sans-kr;
+    font-size: $Micro;
+    font-weight: $Regular;
+    color: $light-gray2;
+}
+
+@mixin Congestion-common($bg-color) {
+    font-family: $font-noto-sans-kr;
+    font-size: $Small;
+    font-weight: $Bold;
+    color: white;
+    background-color: $bg-color;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+@mixin Congestion-1 {
+    // 붐빔
+    @include Congestion-common($Congestion-1);
+}
+
+@mixin Congestion-2 {
+    // 약간 붐빔
+    @include Congestion-common($Congestion-2);
+}
+
+@mixin Congestion-3 {
+    // 보통
+    @include Congestion-common($Congestion-3);
+}
+
+@mixin Congestion-4 {
+    // 여유
+    @include Congestion-common($Congestion-4);
+}
+
+// @mixin strong-style {
+//     font-family: $font-nanum-gothic;
+//     font-size: $ExtraLarge;
+//     font-weight: $Bold;
+// }

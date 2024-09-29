@@ -1,0 +1,151 @@
+@charset "UTF-8";
+.card {
+  border: 1px solid red;
+}
+
+.placecard {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 32px;
+  margin: 0 0 1.5rem 0;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.placecard:hover {
+  translate: tran;
+}
+
+.placecard__wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.placecard__img {
+  width: 210px;
+  min-width: 210px;
+  height: 205px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.placecard__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 1rem;
+}
+
+.placecard__title {
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.placecard__desc {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #979797;
+  padding: 1rem 0 1rem 0;
+}
+
+.placecard__gender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.placecard__gender-female,
+.placecard__gender-male {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #979797;
+  gap: 0.5rem;
+}
+
+.placecard__gender-female::before {
+  content: url(../../../../assets/female.svg);
+  height: 23px;
+  width: 23px;
+  background-color: #ffdfda;
+  border-radius: 10%;
+  display: flex;
+}
+
+.placecard__gender-male::before {
+  content: url(../../../../assets/male.svg);
+  height: 23px;
+  width: 23px;
+  background-color: #cfebff;
+  border-radius: 10%;
+  display: flex;
+}
+
+.content__label {
+  display: flex;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.content__label-congest {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #dd1f3d;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.붐빔 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #dd1f3d;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.약간 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #ff8040;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.보통 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #ffb100;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.여유 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #00d369;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}/*# sourceMappingURL=Card.css.map */

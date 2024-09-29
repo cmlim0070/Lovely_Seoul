@@ -1,0 +1,40 @@
+@import "../../../variable.scss";
+
+.header {
+    box-sizing: border-box;
+
+    height: 100px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $padding-thick;
+
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header__left {
+    display: flex;
+    gap: 1rem;
+}
+
+.header__right {
+    display: flex;
+}
+
+.favorite__button {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.search {
+    width: 540px;
+    height: 40px;
+    background-color: #f4f7ff;
+    border: {
+        radius: 10px;
+    }
+}

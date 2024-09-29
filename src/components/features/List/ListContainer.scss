@@ -1,0 +1,20 @@
+.listcon {
+    height: 100%;
+    width: 850px;
+
+    box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.listcon__list {
+    height: 100%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    padding: 0.5rem;
+}
+
+.listcon__list::-webkit-scrollbar {
+    display: none;
+}
