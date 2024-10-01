@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nivo/bar": "^0.87.0",
+    "@nivo/bullet": "^0.87.0",
+    "@nivo/core": "^0.87.0",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-devtools": "^5.58.0",
     "dotenv": "^16.4.5",
@@ -19,6 +22,7 @@
     "react-kakao-maps-sdk": "^1.1.27",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.2",
+    "react-spinners": "^0.14.1",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {

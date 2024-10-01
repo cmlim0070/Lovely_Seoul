@@ -72,7 +72,7 @@ $padding-thicker: 2rem;
     color: $light-gray2;
 }
 
-@mixin Congestion-common($bg-color) {
+@mixin label-common($bg-color) {
     font-family: $font-noto-sans-kr;
     font-size: $Small;
     font-weight: $Bold;
@@ -85,22 +85,57 @@ $padding-thicker: 2rem;
 
 @mixin Congestion-1 {
     // 붐빔
-    @include Congestion-common($Congestion-1);
+    @include label-common($Congestion-1);
 }
 
 @mixin Congestion-2 {
     // 약간 붐빔
-    @include Congestion-common($Congestion-2);
+    @include label-common($Congestion-2);
 }
 
 @mixin Congestion-3 {
     // 보통
-    @include Congestion-common($Congestion-3);
+    @include label-common($Congestion-3);
 }
 
 @mixin Congestion-4 {
     // 여유
-    @include Congestion-common($Congestion-4);
+    @include label-common($Congestion-4);
+}
+
+@mixin age-10 {
+    // 10대
+    @include label-common($age-10);
+}
+
+@mixin age-20 {
+    // 20대
+    @include label-common($age-20);
+}
+
+@mixin age-30 {
+    // 30대
+    @include label-common($age-30);
+}
+
+@mixin age-40 {
+    // 40대
+    @include label-common($age-40);
+}
+
+@mixin age-50 {
+    // 50대
+    @include label-common($age-50);
+}
+
+@mixin age-60 {
+    // 60대
+    @include label-common($age-60);
+}
+
+@mixin button-listcon {
+    font-size: $Medium;
+    color: #6b6f7b;
 }
 
 // @mixin strong-style {

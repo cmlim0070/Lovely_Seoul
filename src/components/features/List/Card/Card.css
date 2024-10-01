@@ -6,21 +6,25 @@
 .placecard {
   border-radius: 10px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
-  padding: 32px;
+  padding: 32px 32px 0 32px;
   margin: 0 0 1.5rem 0;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 .placecard:hover {
-  translate: tran;
+  cursor: pointer;
 }
 
 .placecard__wrap {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.placecard__wrap2 {
+  width: 100%;
 }
 
 .placecard__img {
@@ -43,6 +47,33 @@
   font-family: "Do Hyeon", sans-serif;
   font-size: 26px;
   font-weight: 400;
+}
+
+.content__datail__notbusy {
+  background-color: #eeeeee;
+  font-size: 36px;
+  font-weight: 500;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+.content__datail__notbusy .blue {
+  color: #0087ca;
+}
+
+.placecard__location {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.placecard__location::before {
+  content: url(../../../../assets/주소.svg);
+  height: 20px;
+  display: flex;
 }
 
 .placecard__desc {
@@ -90,9 +121,113 @@
   display: flex;
 }
 
+.content__detail {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, opacity 0.3s ease;
+  padding: 1.5rem 0 0 0;
+}
+
+.content__detail--active {
+  height: 240px;
+  padding: 1.5rem 0 0 0;
+  transition: height 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.content__datail__graph {
+  height: 80px;
+}
+
+.content__datail__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 1rem 0;
+}
+
+.button__detail {
+  height: 20px;
+  transform: rotate(180deg);
+}
+
 .content__label {
   display: flex;
   padding: 0.5rem 0 0.5rem 0;
+  gap: 0.5rem;
+}
+
+.fescard {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 32px 32px 32px 32px;
+  margin: 0 0 1.5rem 0;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.fescard:hover {
+  cursor: pointer;
+}
+
+.fescard__wrap {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fescard__img {
+  width: 210px;
+  min-width: 210px;
+  height: 205px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.fescard__content {
+  display: flex;
+  flex-direction: column;
+  height: 205px;
+  width: 100%;
+  margin-left: 1rem;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.fescard__title {
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.fescard__location {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.fescard__location::before {
+  content: url(../../../../assets/주소.svg);
+  height: 20px;
+  display: flex;
+}
+
+.fescard__desc {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #979797;
+  padding: 1rem 0 1rem 0;
+}
+
+.placecard__title {
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
 }
 
 .content__label-congest {
@@ -145,6 +280,72 @@
   font-weight: 900;
   color: white;
   background-color: #00d369;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age10대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #ffafa3;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age20대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #ffc470;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age30대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #ffd966;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age40대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #85e0a3;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age50대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #80caff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.age60대 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background-color: #d9b8ff;
   border-radius: 20px;
   box-sizing: border-box;
   padding: 0.5rem;

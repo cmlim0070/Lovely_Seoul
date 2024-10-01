@@ -1,11 +1,15 @@
 @import "../../../../variable.scss";
 
 .title {
-    padding: 3rem 0 3rem 0;
+    padding: 3rem 0 1rem 0;
 }
 
 .title__main {
     @include h2-style;
+}
+
+.title__main__blue {
+    color: $seoul-blue;
 }
 
 .title__desc {

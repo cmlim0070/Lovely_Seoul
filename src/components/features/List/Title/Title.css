@@ -1,11 +1,15 @@
 .title {
-  padding: 3rem 0 3rem 0;
+  padding: 3rem 0 1rem 0;
 }
 
 .title__main {
   font-family: "Nanum Gothic", sans-serif;
   font-size: 28px;
   font-weight: 900;
+}
+
+.title__main__blue {
+  color: #0087ca;
 }
 
 .title__desc {

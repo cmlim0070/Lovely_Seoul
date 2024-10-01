@@ -1,28 +1,54 @@
 import { useState, useEffect } from "react";
-import {
-    Map,
-    MapMarker,
-    useMap,
-    RemovableCustomOverlayStyle,
-} from "react-kakao-maps-sdk";
+import { Map, MapMarker, useMap } from "react-kakao-maps-sdk";
 import "./KakaoMap.css";
 import useFetch from "../../../hooks/useFetch";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import PlacePopup from "./PlacePopup";
-import EventMarkerContainer from "./PlacePopup";
+import ky from "ky";
+import FestivalPopup from "./FestivalPopup";
+import hotspotdata from "../../../data/hotspot116.json";
 
 const centerOfSeoul = {
     lat: 37.5665,
     lng: 126.978,
 };
 
+const hotspotNameList = hotspotdata.map((item) => item.name_kr);
+const apiKey = import.meta.env.VITE_SEOUL_API_KEY;
+
 export default function KakaoMap(props) {
-    const [level, setLevel] = useState(8);
+    const [level, setLevel] = useState(6);
+    const [hotspotDataList, setHotspotDataList] = useState([]);
 
     const { data, isLoading, error } = useFetch(
         "hotspotMark",
         `https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true`
     );
+
+    const queryClient = useQueryClient();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (data && data.row) {
+                const promises = data.row.map(async (element) => {
+                    const url = `http://openapi.seoul.go.kr:8088/${apiKey}/json/citydata_ppltn/1/5/${element.area_nm}`;
+                    const response = await ky.get(url).json();
+                    return { area: element, populationData: response };
+                });
+
+                const results = await Promise.all(promises);
+
+                queryClient.setQueryData(["hotspotMark"], (oldData) => {
+                    return {
+                        ...oldData,
+                        populationData: results,
+                    };
+                });
+            }
+        };
+
+        fetchData();
+    }, [data, queryClient]);
 
     const zoomIn = () => {
         setLevel((prevLevel) => Math.max(prevLevel - 1, 1)); // 최소 레벨 1
@@ -44,14 +70,13 @@ export default function KakaoMap(props) {
 
     return (
         <div className="kakaomap">
-            <RemovableCustomOverlayStyle />
             <Map
                 center={centerOfSeoul}
                 level={level}
                 style={{ width: "100%", height: "100%" }}
             >
                 {data.row.map((value, index) => (
-                    <EventMarkerContainer
+                    <PlacePopup
                         key={index}
                         content={value.area_nm}
                         lat={value.x}

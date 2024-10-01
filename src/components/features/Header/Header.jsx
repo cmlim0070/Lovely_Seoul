@@ -8,7 +8,9 @@ export default function Header() {
             <div className="header__left">
                 <Logo />
                 <div className="search">
-                    <div className="search__input"></div>
+                    <div className="search__input">
+                        <input className="search" />
+                    </div>
                     <div className="search__button"></div>
                 </div>
             </div>

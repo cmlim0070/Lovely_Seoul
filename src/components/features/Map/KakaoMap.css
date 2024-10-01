@@ -9,4 +9,87 @@
 
 .__react-kakao-maps-sdk___Map {
   border-radius: 10%;
+}
+
+.popup__wrap {
+  width: 150px;
+  background-color: white;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  transform: translateY(-165px);
+}
+
+.popup__wrap:after {
+  border-top: 15px solid white;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  transform: translateY(30px);
+}
+
+.popup__imgwrap {
+  border-radius: 10%;
+  width: 120px;
+  height: 140px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.popup__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10%;
+}
+
+.popup__title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.fespopup__wrap {
+  width: 300px;
+  background-color: white;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.fespopup__imgwrap {
+  border-radius: 10%;
+  width: 120px;
+  height: 140px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.fespopup__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10%;
+}
+
+.fespopup__title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.fespopup__wrap:after {
+  border-top: 15px solid white;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  transform: translateY(30px);
 }/*# sourceMappingURL=KakaoMap.css.map */
