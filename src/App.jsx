@@ -15,6 +15,9 @@ import "./App.css";
 
 import Home from "./pages/Home";
 import Layout from "./components/layout/Layout";
+import FestivalList from "./components/features/List/FestivalList";
+import ListContainer from "./components/features/List/ListContainer";
+import LoginModal from "./components/common/Login/LoginModal";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +27,20 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
-                        <Route index element={<Home />} />
+                        <Route path="/" element={<Home />}>
+                            <Route
+                                index
+                                element={<ListContainer type="place" />}
+                            />
+                            <Route
+                                path="festivals"
+                                element={<ListContainer type="festival" />}
+                            />
+                            <Route
+                                path="favorite"
+                                element={<ListContainer type="favorite" />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

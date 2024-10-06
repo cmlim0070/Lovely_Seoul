@@ -12,19 +12,34 @@
   padding: 32px 32px 0 32px;
   margin: 0 0 1.5rem 0;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .placecard:hover {
   cursor: pointer;
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.placecard__topwrap {
+  display: flex;
 }
 
 .placecard__wrap {
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
+  width: 100%;
 }
 
 .placecard__wrap2 {
   width: 100%;
+}
+
+.placecard__favorite {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .placecard__img {
@@ -222,6 +237,32 @@
   font-weight: 400;
   color: #979797;
   padding: 1rem 0 1rem 0;
+}
+
+.fescard__linkcon {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+.fescard__linkcon .fescard__link {
+  padding: 1rem;
+  border-radius: 10px;
+  transition: height 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  transform: translate(15px, 15px);
+}
+.fescard__linkcon .fescard__link:hover {
+  background-color: rgb(204, 224, 255);
+  color: #0087ca;
+}
+.fescard__linkcon img {
+  transform: rotate(-90deg);
+}
+.fescard__linkcon button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .placecard__title {

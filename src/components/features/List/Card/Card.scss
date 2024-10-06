@@ -6,7 +6,6 @@
 
 .placecard {
     border-radius: 10px;
-    // height: 500px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -17,20 +16,34 @@
     box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
         rgba(17, 17, 26, 0.1) 0px 0px 8px;
 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
-        // background-color: #f1f1f1;
         cursor: pointer;
+        transform: translateY(-10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
+}
+
+.placecard__topwrap {
+    display: flex;
 }
 
 .placecard__wrap {
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
+    width: 100%;
 }
 
 .placecard__wrap2 {
     width: 100%;
+}
+
+.placecard__favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .placecard__img {
@@ -129,7 +142,6 @@
 }
 
 .content__detail--active {
-    // 높이 하드코딩해두었는데 동적으로 받아오게 수정
     height: 240px;
     padding: 1.5rem 0 0 0;
     transition: height 0.3s ease, opacity 0.3s ease;
@@ -232,6 +244,35 @@
 .fescard__desc {
     @include span-style;
     padding: 1rem 0 1rem 0;
+}
+
+.fescard__linkcon {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+
+    .fescard__link {
+        padding: 1rem;
+        border-radius: 10px;
+        transition: height 0.3s ease, opacity 0.3s ease,
+            background-color 0.3s ease, color 0.3s ease;
+        transform: translate(15px, 15px);
+        &:hover {
+            background-color: rgb(204, 224, 255);
+            color: $seoul-blue;
+        }
+    }
+
+    img {
+        transform: rotate(-90deg);
+    }
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
 }
 
 ////////////////////////////////////////////////

@@ -30,4 +30,11 @@
   height: 40px;
   background-color: #f4f7ff;
   border-radius: 10px;
+}
+.search input {
+  border: none;
+  outline: none;
+}
+.search input:focus {
+  outline: 3px solid #0087ca;
 }/*# sourceMappingURL=Header.css.map */

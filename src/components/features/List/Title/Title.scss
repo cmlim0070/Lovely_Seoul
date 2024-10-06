@@ -1,9 +1,10 @@
 @import "../../../../variable.scss";
 
 .title {
-    padding: 3rem 0 1rem 0;
+    padding: 3rem 0 1rem 1rem;
 }
 
+.title-login,
 .title__main {
     @include h2-style;
 }
@@ -12,6 +13,7 @@
     color: $seoul-blue;
 }
 
+.title-login__desc,
 .title__desc {
     @include p-style;
     padding: $padding-thin 0 $padding-thin 0;

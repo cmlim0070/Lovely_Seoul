@@ -24,19 +24,6 @@ export default function PlacePopup({ lat, lng, index, content }) {
         return response.CITYDATA.EVENT_STTS;
     };
 
-    // useEffect(() => {
-    //     if (fesDataList) {
-    //         console.log("focused 문화행사", fesDataList); // 상태 업데이트 이후의 값
-    //     }
-    // }, [fesDataList]);
-
-    // useEffect(() => {
-    //     // focusedPlace가 존재하고 isVisible이 true일 때만 데이터 패치
-    //     if (focusedPlace && isVisible) {
-    //         getFestivalData(focusedPlace);
-    //     }
-    // }, [focusedPlace, isVisible]);
-
     function handleClick() {
         getFestivalData(content);
         setFocusedPlace(content);
@@ -45,7 +32,6 @@ export default function PlacePopup({ lat, lng, index, content }) {
 
     return (
         <>
-            {/* 장소 마커 */}
             <MapMarker
                 key={content}
                 position={{
@@ -53,28 +39,26 @@ export default function PlacePopup({ lat, lng, index, content }) {
                     lng: lng,
                 }}
                 image={{
-                    src: "/placepin.svg", // 마커이미지의 주소입니다
+                    src: "/placepin.svg",
                     size: {
                         width: 40,
                         height: 40,
-                    }, // 마커이미지의 크기입니다
+                    },
                     options: {
                         offset: {
                             x: 20,
                             y: 30,
-                        }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                        },
                     },
                 }}
                 style={{
                     zIndex: 2,
                 }}
-                // @ts-ignore
                 onClick={(marker) => {
                     handleClick();
                     map.panTo(marker.getPosition());
                 }}
             ></MapMarker>
-            {/* 장소 핀 오버레이 */}
             {isVisible && (
                 <CustomOverlayMap
                     position={{
@@ -97,7 +81,6 @@ export default function PlacePopup({ lat, lng, index, content }) {
                     </div>
                 </CustomOverlayMap>
             )}
-            {/* 문화행사 마커*/}
             {fesDataList &&
                 fesDataList.map((value, index) => {
                     return (

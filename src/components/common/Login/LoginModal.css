@@ -1,0 +1,61 @@
+.loginmodal__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loginmodal {
+  background: white;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginmodal__title {
+  font-size: 26px;
+}
+
+.loginmodal__desc {
+  font-size: 16px;
+  color: #979797;
+  text-align: center;
+}
+
+.loginmodal__userinput form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0 2rem 0;
+}
+.loginmodal__userinput form input,
+.loginmodal__userinput form select {
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+.loginmodal__userinput form button {
+  background-color: #0087ca;
+  border-radius: 30px;
+  width: 340px;
+  height: 50px;
+  font-size: 16px;
+  color: white;
+}/*# sourceMappingURL=LoginModal.css.map */
