@@ -1,122 +1,81 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useRef, useMemo } from "react";
+import { BounceLoader } from "react-spinners";
 import useFocus from "../../../store/useFocus";
 import useSearch from "../../../store/useSearch";
 import PlaceCard from "./Card/PlaceCard";
-import { BounceLoader } from "react-spinners";
 import useScrollRestoration from "../../../hooks/useScrollRestoration";
 import useAuth from "../../../store/useAuth";
-import FavoriteEmptyList from "./FavoriteEmptyList";
+import useAllData from "../../../store/useAllData";
 
 export default function PlaceList({ type }) {
-    const queryClient = useQueryClient();
-    const { focusedPlace, setFocusedPlace } = useFocus();
-    const [hotspotDataList, setHotspotDataList] = useState([]);
+    console.log("리스트타입 : ", type);
+
     const cardRefs = useRef([]);
+    const { focusedPlace } = useFocus();
     const { username, userage } = useAuth();
     const { searchTerm } = useSearch();
+    const { AllData } = useAllData();
 
+    useEffect(() => {
+        console.log("AllData in PlaceList: ", AllData); // AllData 출력 확인
+        cardRefs.current = new Array(AllData.length);
+    }, [AllData]);
+
+    // 스크롤 복원
+    // useScrollRestoration("placeListScroll");
+
+    // 로컬 스토리지에서 사용자의 좋아요 장소 리스트 가져오기
     const favoritePlaces = useMemo(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites")) || {};
         return favorites[username] || [];
     }, [username]);
 
-    useScrollRestoration("placeListScroll");
-
-    const { data: hotspotData } = useQuery({
-        queryKey: ["hotspotMark"],
-        queryFn: () => {
-            return queryClient.getQueryData(["hotspotMark"]);
-        },
-        enabled: false,
-    });
-
+    // 마커 클릭한 쪽으로 스크롤 이동
     useEffect(() => {
-        if (focusedPlace !== null && hotspotDataList !== null) {
-            const index = hotspotDataList.findIndex(
-                (item) => item.area.area_nm === focusedPlace
+        if (focusedPlace !== null && AllData !== null) {
+            const index = AllData.findIndex(
+                (item) => item.area_nm === focusedPlace
             );
             if (index !== -1 && cardRefs.current[index]) {
                 cardRefs.current[index].scrollIntoView({ behavior: "smooth" });
+
+                const scrollY =
+                    cardRefs.current[index].getBoundingClientRect().top +
+                    window.scrollY;
+                sessionStorage.setItem("placeListScroll", scrollY);
+                console.log("Saving focused place scroll position:", scrollY);
             }
         }
-    }, [focusedPlace, hotspotDataList]);
+    }, [focusedPlace, AllData]);
 
-    useEffect(() => {
-        if (hotspotData && hotspotData.populationData) {
-            const updatedData = hotspotData["populationData"].map((data) => {
-                const ageDataList =
-                    data.populationData["SeoulRtd.citydata_ppltn"][0];
-                const ageData = [
-                    {
-                        age: "10대",
-                        rate: Number(ageDataList.PPLTN_RATE_10) || 0,
-                    },
-                    {
-                        age: "20대",
-                        rate: Number(ageDataList.PPLTN_RATE_20) || 0,
-                    },
-                    {
-                        age: "30대",
-                        rate: Number(ageDataList.PPLTN_RATE_30) || 0,
-                    },
-                    {
-                        age: "40대",
-                        rate: Number(ageDataList.PPLTN_RATE_40) || 0,
-                    },
-                    {
-                        age: "50대",
-                        rate: Number(ageDataList.PPLTN_RATE_50) || 0,
-                    },
-                    {
-                        age: "60대",
-                        rate: Number(ageDataList.PPLTN_RATE_60) || 0,
-                    },
-                ];
-                const mostPopularAge = ageData.reduce((max, current) =>
-                    current.rate > max.rate ? current : max
-                );
-                return {
-                    ...data,
-                    mostPopularAge: mostPopularAge.age, // 예: '20대'
-                };
-            });
-            setHotspotDataList(updatedData);
-            cardRefs.current = new Array(updatedData.length);
-        }
-    }, [hotspotData]);
-
+    // 검색 - 데이터 필터링
     const filteredData = useMemo(() => {
-        return searchPlaceList(hotspotDataList, searchTerm);
-    }, [hotspotDataList, searchTerm]);
+        return searchPlaceList(AllData, searchTerm);
+    }, [AllData, searchTerm]);
 
     function searchPlaceList(list, word) {
         return word
             ? list.filter(
                   (item) =>
-                      item.area.area_nm
-                          .toLowerCase()
-                          .includes(word.toLowerCase()) ||
-                      item.populationData[
-                          "SeoulRtd.citydata_ppltn"
-                      ][0].AREA_CONGEST_LVL.includes(word)
+                      item.area_nm.toLowerCase().includes(word.toLowerCase()) || //장소 이름
+                      item.area_congest_lvl.toLowerCase().includes(word) //장소 혼잡도
               )
             : list;
     }
 
+    // 즐겨찾기 리스트 필터링
     const favoritefilteredData = useMemo(() => {
-        const allFilteredData = searchPlaceList(hotspotDataList, searchTerm);
+        const allFilteredData = searchPlaceList(AllData, searchTerm);
         return allFilteredData.filter((item) =>
-            favoritePlaces.includes(item.area.area_nm)
+            favoritePlaces.includes(item.area_nm)
         );
-    }, [hotspotDataList, searchTerm, favoritePlaces]);
+    }, [AllData, searchTerm, favoritePlaces]);
 
-    // const dataToDisplay =
-    //     type === "favorite" ? favoritefilteredData : filteredData;
-
+    // 데이터 우선순위 정렬
     const dataToDisplay = useMemo(() => {
         const prioritizedData =
             type === "favorite" ? favoritefilteredData : filteredData;
+        console.log("prioritizedData", prioritizedData);
 
         return [
             ...prioritizedData.filter((item) =>
@@ -128,11 +87,15 @@ export default function PlaceList({ type }) {
         ];
     }, [type, filteredData, favoritefilteredData, userage]);
 
+    useEffect(() => {
+        console.log("dataToDisplay in PlaceList: ", dataToDisplay); // dataToDisplay 출력 확인
+        cardRefs.current = new Array(dataToDisplay.length);
+    }, [dataToDisplay]);
+
     return (
         <div className="listcon__contentwrap">
             {dataToDisplay && dataToDisplay.length > 0 ? (
                 dataToDisplay.map((value, index) => {
-                    console.log(value);
                     return (
                         <div
                             key={index}
@@ -142,16 +105,9 @@ export default function PlaceList({ type }) {
                         >
                             <PlaceCard
                                 key={index}
-                                data={
-                                    value.populationData[
-                                        "SeoulRtd.citydata_ppltn"
-                                    ][0]
-                                }
+                                address={value.address}
                                 mostPopularAge={value.mostPopularAge}
-                                location={{
-                                    lat: value.area.x,
-                                    lng: value.area.y,
-                                }}
+                                data={value.population}
                             />
                         </div>
                     );

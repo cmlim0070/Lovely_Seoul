@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import "./Card.css";
 import Graph from "./Graph";
-import SkeletonCard from "./SkeletonCard";
 import arrowimg from "../../../../assets/아코디언화살표.svg";
 import favorite from "../../../../assets/좋아요 비활성.svg";
 import activeFavorite from "../../../../assets/좋아요 활성.svg";
 import useAuth from "./../../../../store/useAuth";
 
-export default function PlaceCard({ data, location, mostPopularAge }) {
+/**
+ * @param {Object} data 장소에 대한 정보 객체
+ * @param {Object} location 장소의 위도, 경도 정보
+ * @param {string} mostPopularAge 해당 장소에서 가장 인기 있는 연령대
+ */
+export default function PlaceCard({ data, address, mostPopularAge }) {
     const {
         AREA_NM,
         AREA_CONGEST_MSG,
@@ -39,53 +43,34 @@ export default function PlaceCard({ data, location, mostPopularAge }) {
         },
     ];
 
-    // const ageData = [
-    //     { age: "10대", rate: Number(PPLTN_RATE_10) || 0 },
-    //     { age: "20대", rate: Number(PPLTN_RATE_20) || 0 },
-    //     { age: "30대", rate: Number(PPLTN_RATE_30) || 0 },
-    //     { age: "40대", rate: Number(PPLTN_RATE_40) || 0 },
-    //     { age: "50대", rate: Number(PPLTN_RATE_50) || 0 },
-    //     { age: "60대", rate: Number(PPLTN_RATE_60) || 0 },
-    // ];
-
     const ingURL = `https://data.seoul.go.kr/SeoulRtd/images/hotspot/${AREA_NM}.jpg`;
-    const { lat, lng } = location;
 
-    const [address, setAddress] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isSelected, setSelected] = useState(false);
+    const [isFavorited, setIsFavorited] = useState(false);
+    const { isLoggedIn, username } = useAuth();
+    const { lat, lng } = location;
 
+    /**
+     * 카드 클릭 시 확장 섹션 토글
+     */
     function handleClick() {
         setSelected(!isSelected);
     }
 
-    useEffect(() => {
-        const geocoder = new window.kakao.maps.services.Geocoder();
-        const coord = new window.kakao.maps.LatLng(lat, lng);
-        const callback = function (result, status) {
-            if (status === window.kakao.maps.services.Status.OK) {
-                setAddress(result[0].address.address_name);
-                setLoading(false);
-            } else {
-                setLoading(false);
-            }
-        };
-        geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-    }, [lat, lng]);
-
-    // const mostPopularAge = ageData.reduce((max, current) =>
-    //     current.rate > max.rate ? current : max
-    // );
-
+    /**
+     * 가장 한산한 시간 도출
+     */
     const notBusyTime = FCST_PPLTN.reduce((min, current) =>
         Number(current.FCST_PPLTN_MAX) < Number(min.FCST_PPLTN_MAX)
             ? current
             : min
     );
 
-    const [isFavorited, setIsFavorited] = useState(false);
-    const { isLoggedIn, username } = useAuth();
-
+    /**
+     * 즐겨찾기 추가/제거 토글 함수
+     * - 로그인된 사용자만 사용 가능하며, 즐겨찾기 상태를 로컬스토리지에 저장
+     */
     const toggleFavorite = () => {
         if (!isLoggedIn) {
             alert("로그인 후 사용 가능합니다!");
@@ -115,6 +100,9 @@ export default function PlaceCard({ data, location, mostPopularAge }) {
         });
     };
 
+    /**
+     * 컴포넌트 마운트 시 로컬스토리지에서 즐겨찾기 상태를 불러옴
+     */
     useEffect(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites")) || {};
         if (favorites[username] && favorites[username].includes(AREA_NM)) {
@@ -143,10 +131,7 @@ export default function PlaceCard({ data, location, mostPopularAge }) {
                     </div>
                     <div className="placecard__content">
                         <div className="placecard__title">{AREA_NM}</div>
-                        <div className="placecard__location">
-                            {" "}
-                            {loading ? "주소를 가져오는 중입니다..." : address}
-                        </div>
+                        <div className="placecard__location">{address}</div>
                         <span className="placecard__desc">
                             {AREA_CONGEST_MSG}
                         </span>

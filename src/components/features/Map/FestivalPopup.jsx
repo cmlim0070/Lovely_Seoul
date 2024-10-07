@@ -5,8 +5,7 @@ import "./KakaoMap.css";
 export default function FestivalPopup({ value }) {
     const map = useMap();
 
-    const { EVENT_NM, EVENT_Y, EVENT_X, THUMBNAIL, URL, EVENT_PLACE } =
-        value || {};
+    const { EVENT_NM, EVENT_Y, EVENT_X, THUMBNAIL, URL } = value || {};
 
     const [isFesVisible, setIsFesVisible] = useState(false);
 
@@ -42,7 +41,6 @@ export default function FestivalPopup({ value }) {
                     setIsFesVisible(true);
                 }}
             />
-            {/* 문화행사 팝업 */}
             {isFesVisible && (
                 <CustomOverlayMap
                     position={{

@@ -5,8 +5,13 @@ export default function useFetch(dataLabel, url) {
     const result = useQuery({
         queryKey: [dataLabel],
         queryFn: async () => {
-            const response = await ky.get(url).json();
-            return response;
+            try {
+                const response = await ky.get(url).json();
+                return response;
+            } catch (err) {
+                console.error("Fetch error: ", err);
+                throw err;
+            }
         },
     });
 

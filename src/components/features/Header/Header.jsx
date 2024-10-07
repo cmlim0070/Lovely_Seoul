@@ -1,22 +1,39 @@
-import "./Header.css";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import debounce from "lodash/debounce";
 import Logo from "../../../components/common/Logo";
 import favorite from "../../../assets/favorite.svg";
 import useSearch from "../../../store/useSearch";
 import useModal from "../../../store/useModal";
 import useAuth from "../../../store/useAuth";
+import "./Header.css";
+import { useCallback } from "react";
 
 export default function Header() {
     const { setSearchTerm } = useSearch();
     const { openModal } = useModal();
-    const { username, userage, isLoggedIn } = useAuth();
+    const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
 
+    /**
+     * 검색어가 변경될 때 호출
+     * @param {Event} e 입력 이벤트
+     */
+    const handleSearch = useCallback(
+        debounce((value) => {
+            setSearchTerm(value);
+        }, 300),
+        []
+    );
+
     function handleChange(e) {
-        setSearchTerm(e.target.value);
+        handleSearch(e.target.value);
     }
 
+    /**
+     * 즐겨찾기 버튼 클릭 시 호출
+     * 로그인 여부에 따라 페이지 이동 또는 모달 표시
+     * @param {Event} e 클릭 이벤트
+     */
     function handleFavoriteClick(e) {
         e.preventDefault();
 

@@ -1,12 +1,8 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState, useEffect, useRef, useMemo } from "react";
-import useFocus from "../../../store/useFocus";
+import { BounceLoader } from "react-spinners";
 import useFes from "../../../store/useFes";
 import FestivalCard from "./Card/FestivalCard";
-import { BounceLoader } from "react-spinners";
 
 export default function FestivalList() {
-    // const { focusedPlace, setFocusedPlace } = useFocus();
     const { fesDataList } = useFes();
 
     return (

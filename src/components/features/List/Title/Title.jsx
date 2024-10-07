@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import useFocus from "../../../../store/useFocus";
 import "./Title.css";
 import useAuth from "../../../../store/useAuth";
 import PlaceTitle from "./PlaceTitle";
