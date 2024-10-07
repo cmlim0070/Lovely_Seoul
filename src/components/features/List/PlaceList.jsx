@@ -17,12 +17,11 @@ export default function PlaceList({ type }) {
     const { AllData } = useAllData();
 
     useEffect(() => {
-        console.log("AllData in PlaceList: ", AllData); // AllData 출력 확인
         cardRefs.current = new Array(AllData.length);
     }, [AllData]);
 
     // 스크롤 복원
-    // useScrollRestoration("placeListScroll");
+    useScrollRestoration("placeListScroll");
 
     // 로컬 스토리지에서 사용자의 좋아요 장소 리스트 가져오기
     const favoritePlaces = useMemo(() => {
@@ -75,7 +74,6 @@ export default function PlaceList({ type }) {
     const dataToDisplay = useMemo(() => {
         const prioritizedData =
             type === "favorite" ? favoritefilteredData : filteredData;
-        console.log("prioritizedData", prioritizedData);
 
         return [
             ...prioritizedData.filter((item) =>
@@ -88,7 +86,6 @@ export default function PlaceList({ type }) {
     }, [type, filteredData, favoritefilteredData, userage]);
 
     useEffect(() => {
-        console.log("dataToDisplay in PlaceList: ", dataToDisplay); // dataToDisplay 출력 확인
         cardRefs.current = new Array(dataToDisplay.length);
     }, [dataToDisplay]);
 
@@ -107,6 +104,7 @@ export default function PlaceList({ type }) {
                                 key={index}
                                 address={value.address}
                                 mostPopularAge={value.mostPopularAge}
+                                location={{ lat: value.x, lng: value.y }}
                                 data={value.population}
                             />
                         </div>

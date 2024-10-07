@@ -56,6 +56,9 @@
 .popup__title {
     font-size: $Medium;
     font-weight: $Bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .fespopup__wrap {

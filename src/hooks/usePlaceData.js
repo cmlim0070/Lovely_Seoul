@@ -54,8 +54,6 @@ export default function usePlaceData(placeLists) {
             }
         } catch (err) {
             console.log(err);
-        } finally {
-            console.log("AllData : ", AllData);
         }
     }, [placeLists, setAllData]);
 }
