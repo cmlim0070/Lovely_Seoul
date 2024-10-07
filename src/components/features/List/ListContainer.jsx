@@ -1,25 +1,31 @@
 import { Link } from "react-router-dom";
-import "./ListContainer.css";
-import Title from "./Title/Title";
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import useFocus from "../../../store/useFocus";
+import Title from "./Title/Title";
 import PlaceList from "./PlaceList";
 import FestivalList from "./FestivalList";
-import FavoriteList from "./FavoriteList";
+import "./ListContainer.css";
+import useAllData from "../../../store/useAllData";
+import useScrollRestoration from "../../../hooks/useScrollRestoration";
 
 export default function ListContainer({ type }) {
     const { focusedPlace } = useFocus();
 
-    useEffect(() => {
-        const savedScrollPosition = localStorage.getItem("scrollPosition");
-        if (savedScrollPosition) {
-            window.scrollTo(0, parseInt(savedScrollPosition, 10));
-        }
-
-        return () => {
-            localStorage.setItem("scrollPosition", window.scrollY);
-        };
-    }, []);
+    //스크롤 복원
+    // useScrollRestoration("placeListScroll");
+    // useEffect(() => {
+    //     const savedScrollPosition = sessionStorage.getItem("placeListScroll");
+    //     if (savedScrollPosition) {
+    //         setTimeout(() => {
+    //             window.scrollTo(0, parseInt(savedScrollPosition, 10));
+    //         }, 0);
+    //     }
+    //     return () => {
+    //         const currentScrollY = window.scrollY;
+    //         console.log("Saving scroll position:", currentScrollY); // 현재 스크롤 위치 로그
+    //         localStorage.setItem("scrollPosition", currentScrollY);
+    //     };
+    // }, []);
 
     return (
         <div className="listcon">

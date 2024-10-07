@@ -1,25 +1,27 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../../store/useAuth";
 import useModal from "../../../store/useModal";
 import "./LoginModal.css";
-import { useNavigate } from "react-router-dom";
 
 export default function LoginModal() {
     const navigate = useNavigate();
-
     const { isOpen, closeModal } = useModal();
     const { setUsername, setUserage, login } = useAuth();
-
     const [username, setName] = useState("");
     const [userage, setAge] = useState("");
 
+    /**
+     * 사용자가 제출한 정보를 처리하고 로그인 절차를 실행
+     * @param {Event} e 제출 이벤트 (form의 submit 이벤트)
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/");
         setUsername(username);
         setUserage(userage);
         login();
-        closeModal(); // 모달 닫기
+        closeModal();
     };
 
     if (!isOpen) return null;

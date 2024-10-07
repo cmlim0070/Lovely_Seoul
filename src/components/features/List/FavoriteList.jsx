@@ -7,6 +7,7 @@ export default function Favorite() {
     const [favoritePlaces, setFavoritePlaces] = useState([]);
     const { isLoggedIn, username } = useAuth();
 
+    // 카드 컴포넌트 좋아요 상태 불러오기
     useEffect(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites")) || {};
         const user_name = username;

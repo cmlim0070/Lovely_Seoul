@@ -18,9 +18,11 @@ export default function PlacePopup({ lat, lng, index, content }) {
     const { fesDataList, setfesDataList } = useFes();
 
     const getFestivalData = async (name) => {
-        const fesURL = `http://openapi.seoul.go.kr:8088/${apiKey}/json/citydata/1/5/${name}`;
+        const fesURL = `/api/fetchFestivalData?placeName=${name}`;
+        // const fesURL = `http://openapi.seoul.go.kr:8088/${apiKey}/json/citydata/1/5/${name}`;
         const response = await ky.get(fesURL).json();
         setfesDataList(response.CITYDATA.EVENT_STTS);
+        console.log(name, " 문화행사 : ", response.CITYDATA.EVENT_STTS);
         return response.CITYDATA.EVENT_STTS;
     };
 
