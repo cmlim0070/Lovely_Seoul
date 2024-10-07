@@ -5,7 +5,7 @@ import FavoriteEmptyList from "./FavoriteEmptyList";
 
 export default function Favorite() {
     const [favoritePlaces, setFavoritePlaces] = useState([]);
-    const { isLoggedIn, username } = useAuth();
+    const { username } = useAuth();
 
     // 카드 컴포넌트 좋아요 상태 불러오기
     useEffect(() => {

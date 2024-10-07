@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { Map, MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { useState } from "react";
+import { MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
 import "./KakaoMap.css";
 
 export default function FestivalPopup({ value }) {
     const map = useMap();
 
-    const { EVENT_NM, EVENT_Y, EVENT_X, THUMBNAIL, URL } = value || {};
+    const { EVENT_NM, EVENT_Y, EVENT_X, THUMBNAIL } = value || {};
 
     const [isFesVisible, setIsFesVisible] = useState(false);
 

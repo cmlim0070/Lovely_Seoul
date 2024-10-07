@@ -1,4 +1,3 @@
-//문화행사 리스트 카드
 import "./Card.css";
 import arrowimg from "../../../../assets/아코디언화살표.svg";
 

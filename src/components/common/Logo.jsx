@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import "./Logo.css";
 
 export default function Logo() {
-    return <img src={logo} alt="Logo" className="logo" />;
+    const navigate = useNavigate();
+    return (
+        <img
+            src={logo}
+            alt="Logo"
+            className="logo"
+            onClick={() => {
+                navigate("/");
+            }}
+        />
+    );
 }

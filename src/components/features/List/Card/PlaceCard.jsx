@@ -5,7 +5,6 @@ import arrowimg from "../../../../assets/아코디언화살표.svg";
 import favorite from "../../../../assets/좋아요 비활성.svg";
 import activeFavorite from "../../../../assets/좋아요 활성.svg";
 import useAuth from "./../../../../store/useAuth";
-import { useMap } from "react-kakao-maps-sdk";
 import useFocus from "../../../../store/useFocus";
 import useMapCenter from "../../../../store/useMapCenter";
 
@@ -48,10 +47,9 @@ export default function PlaceCard({ data, address, mostPopularAge, location }) {
 
     const ingURL = `https://data.seoul.go.kr/SeoulRtd/images/hotspot/${AREA_NM}.jpg`;
 
-    const [loading, setLoading] = useState(true);
     const [isSelected, setSelected] = useState(false);
     const [isFavorited, setIsFavorited] = useState(false);
-    const { focusedPlace, setFocusedPlace } = useFocus();
+    const { setFocusedPlace } = useFocus();
     const { setMapCenter, setMapLevel } = useMapCenter();
     const { isLoggedIn, username } = useAuth();
     const { lat, lng } = location;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
 import "./KakaoMap.css";
 import useFetch from "../../../hooks/useFetch";
@@ -6,7 +6,7 @@ import PlacePopup from "./PlacePopup";
 import useMapCenter from "../../../store/useMapCenter";
 
 export default function KakaoMap(props) {
-    const [level, setLevel] = useState(6);
+    const [setLevel] = useState(6);
     const { mapCenter, mapLevel } = useMapCenter();
 
     //초기 위치 정보 데이터

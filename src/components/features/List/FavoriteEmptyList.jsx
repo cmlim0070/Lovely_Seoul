@@ -1,4 +1,4 @@
-import favoriteemptyimg from "../../../assets/검색 결과 없음 아이콘.svg";
+import favoriteemptyimg from "../../../assets/찜 목록 없음 아이콘.svg";
 
 export default function FavoriteEmptyList() {
     return (

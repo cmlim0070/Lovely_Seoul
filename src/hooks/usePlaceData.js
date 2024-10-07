@@ -4,7 +4,7 @@ import { fetchAll } from "../utils/fetchAll";
 
 // 가장 인기있는 나잇대 정보 추가해서 전체 데이터 세팅
 export default function usePlaceData(placeLists) {
-    const { AllData, setAllData } = useAllData();
+    const { setAllData } = useAllData();
     useEffect(() => {
         try {
             if (placeLists && placeLists.row) {
