@@ -25,15 +25,14 @@ export default function ListContainer({ type }) {
                     </Link>
                 </div>
             )}
-            <div className="listcon__list">
-                {type === "favorite" ? (
-                    <PlaceList type="favorite" />
-                ) : type === "place" ? (
-                    <PlaceList type="all" />
-                ) : (
-                    <FestivalList />
-                )}
-            </div>
+
+            {type === "favorite" ? (
+                <PlaceList type="favorite" />
+            ) : type === "all" ? (
+                <PlaceList type="all" />
+            ) : (
+                <FestivalList />
+            )}
         </div>
     );
 }

@@ -60,9 +60,9 @@ export default function PlaceCard({ data, address, mostPopularAge, location }) {
     function handleClick() {
         setSelected(!isSelected);
         if (!isSelected) {
-            setMapCenter(location);
-            setMapLevel(3);
             setFocusedPlace(AREA_NM);
+            setMapCenter(location);
+            setMapLevel(5);
         }
     }
 

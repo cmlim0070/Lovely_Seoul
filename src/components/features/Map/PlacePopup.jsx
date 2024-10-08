@@ -6,7 +6,9 @@ import useFes from "../../../store/useFes";
 
 import "./KakaoMap.css";
 import FestivalPopup from "./FestivalPopup";
+import { fetchFestivalData } from "../../../utils/fetchFestivalData";
 
+//개별 장소 마커 컨테이너
 export default function PlacePopup({ lat, lng, content }) {
     const map = useMap();
     const imgURL = `https://data.seoul.go.kr/SeoulRtd/images/hotspot/${content}.jpg`;
@@ -21,22 +23,27 @@ export default function PlacePopup({ lat, lng, content }) {
      * @returns {Promise} - 문화 행사 데이터
      */
     const getFestivalData = async (name) => {
-        const fesURL = `/api/fetchFestivalData?placeName=${name}`;
-        const response = await ky.get(fesURL).json();
-        setfesDataList(response.CITYDATA.EVENT_STTS);
-        console.log(name, " 문화행사 : ", response.CITYDATA.EVENT_STTS);
-        return response.CITYDATA.EVENT_STTS;
+        const response = await fetchFestivalData(name);
+        setfesDataList(response);
     };
 
     /**
-     * 마커 클릭 핸들러
+     * 마커 클릭시 축제 데이터 패칭, 포커스 변경, 팝업 토글
      * @returns {void}
      */
     function handleClick() {
-        getFestivalData(content);
         setFocusedPlace(content);
+        getFestivalData(content);
         setIsVisible((prev) => !prev);
     }
+
+    // 리스트 아이템 클릭시 지도 포커싱 이벤트
+    useEffect(() => {
+        if (focusedPlace === content) {
+            getFestivalData(content);
+            setIsVisible(true);
+        }
+    }, [focusedPlace, content]);
 
     return (
         <>

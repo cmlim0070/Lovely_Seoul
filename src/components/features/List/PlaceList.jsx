@@ -3,7 +3,6 @@ import { BounceLoader } from "react-spinners";
 import useFocus from "../../../store/useFocus";
 import useSearch from "../../../store/useSearch";
 import PlaceCard from "./Card/PlaceCard";
-import useScrollRestoration from "../../../hooks/useScrollRestoration";
 import useAuth from "../../../store/useAuth";
 import useAllData from "../../../store/useAllData";
 import SearchEmptyList from "./SearchEmptyList";
@@ -14,9 +13,6 @@ export default function PlaceList({ type }) {
     const { username, userage } = useAuth();
     const { searchTerm } = useSearch();
     const { AllData } = useAllData();
-
-    // 스크롤 복원
-    useScrollRestoration("placeListScroll");
 
     /**
      * 검색어 기반 데이터 필터링
@@ -69,57 +65,58 @@ export default function PlaceList({ type }) {
 
     // 마커 클릭한 쪽으로 스크롤 이동
     useEffect(() => {
-        if (type === "all") {
-            if (focusedPlace !== null && AllData !== null) {
-                const index = AllData.findIndex(
-                    (item) => item.area_nm === focusedPlace
-                );
-                if (index !== -1 && cardRefs.current[index]) {
-                    cardRefs.current[index].scrollIntoView({
-                        behavior: "smooth",
-                    });
+        console.log("훅 호출");
+        if (!AllData || AllData.length === 0 || !focusedPlace) return;
 
-                    const scrollY =
-                        cardRefs.current[index].getBoundingClientRect().top +
-                        window.scrollY;
-                    sessionStorage.setItem("placeListScroll", scrollY);
-                    console.log(
-                        "Saving focused place scroll position:",
-                        scrollY
-                    );
-                }
-            }
+        const index = dataToDisplay.findIndex(
+            (item) => item.area_nm === focusedPlace
+        );
+
+        if (index !== -1 && cardRefs.current[index]) {
+            setTimeout(() => {
+                cardRefs.current[index].scrollIntoView({
+                    behavior: "smooth",
+                });
+            }, 0);
         }
-    }, [focusedPlace, AllData]);
+    }, [focusedPlace, AllData, dataToDisplay]);
+
+    //리스트 변경되면 참조 업데이트
+    useEffect(() => {
+        console.log("흠");
+        cardRefs.current = cardRefs.current.slice(0, dataToDisplay.length);
+    }, [dataToDisplay]);
 
     return (
-        <div className="listcon__contentwrap">
-            {dataToDisplay && dataToDisplay.length > 0 ? (
-                dataToDisplay.map((value, index) => {
-                    return (
-                        <div
-                            key={index}
-                            ref={(el) => {
-                                cardRefs.current[index] = el;
-                            }}
-                        >
-                            <PlaceCard
+        <div className="listcon__list__place">
+            <div className="listcon__contentwrap__place">
+                {dataToDisplay && dataToDisplay.length > 0 ? (
+                    dataToDisplay.map((value, index) => {
+                        return (
+                            <div
                                 key={index}
-                                address={value.address}
-                                mostPopularAge={value.mostPopularAge}
-                                location={{ lat: value.x, lng: value.y }}
-                                data={value.population}
-                            />
-                        </div>
-                    );
-                })
-            ) : searchTerm !== "" && dataToDisplay.length == 0 ? (
-                <SearchEmptyList />
-            ) : (
-                <div className="spinner">
-                    <BounceLoader color="#98e0ff" />
-                </div>
-            )}
+                                ref={(el) => {
+                                    cardRefs.current[index] = el;
+                                }}
+                            >
+                                <PlaceCard
+                                    key={index}
+                                    address={value.address}
+                                    mostPopularAge={value.mostPopularAge}
+                                    location={{ lat: value.x, lng: value.y }}
+                                    data={value.population}
+                                />
+                            </div>
+                        );
+                    })
+                ) : searchTerm !== "" && dataToDisplay.length == 0 ? (
+                    <SearchEmptyList />
+                ) : (
+                    <div className="spinner">
+                        <BounceLoader color="#98e0ff" />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
