@@ -9,7 +9,7 @@ export default function KakaoMap(props) {
     const [setLevel] = useState(6);
     const { mapCenter, mapLevel } = useMapCenter();
 
-    //초기 위치 정보 데이터
+    //App.jsx에서 받아오기 때문에 그걸로 변경해서 바인딩해야됨
     const { data, isLoading, error } = useFetch(
         "hotspotMark",
         `https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true`

@@ -6,7 +6,6 @@ import FestivalTitle from "./FestivalTitle";
 
 export default function Title({ type }) {
     const { isLoggedIn, username, userage } = useAuth();
-    console.log(username, userage);
 
     return (
         <div>

@@ -23,7 +23,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home />}>
-                        <Route index element={<ListContainer type="place" />} />
+                        <Route index element={<ListContainer type="all" />} />
                         <Route
                             path="festivals"
                             element={<ListContainer type="festival" />}
