@@ -5,13 +5,15 @@ import arrowimg from "../../../../assets/아코디언화살표.svg";
 import favorite from "../../../../assets/좋아요 비활성.svg";
 import activeFavorite from "../../../../assets/좋아요 활성.svg";
 import useAuth from "./../../../../store/useAuth";
+import useFocus from "../../../../store/useFocus";
+import useMapCenter from "../../../../store/useMapCenter";
 
 /**
  * @param {Object} data 장소에 대한 정보 객체
  * @param {Object} location 장소의 위도, 경도 정보
  * @param {string} mostPopularAge 해당 장소에서 가장 인기 있는 연령대
  */
-export default function PlaceCard({ data, address, mostPopularAge }) {
+export default function PlaceCard({ data, address, mostPopularAge, location }) {
     const {
         AREA_NM,
         AREA_CONGEST_MSG,
@@ -45,9 +47,10 @@ export default function PlaceCard({ data, address, mostPopularAge }) {
 
     const ingURL = `https://data.seoul.go.kr/SeoulRtd/images/hotspot/${AREA_NM}.jpg`;
 
-    const [loading, setLoading] = useState(true);
     const [isSelected, setSelected] = useState(false);
     const [isFavorited, setIsFavorited] = useState(false);
+    const { setFocusedPlace } = useFocus();
+    const { setMapCenter, setMapLevel } = useMapCenter();
     const { isLoggedIn, username } = useAuth();
     const { lat, lng } = location;
 
@@ -56,6 +59,11 @@ export default function PlaceCard({ data, address, mostPopularAge }) {
      */
     function handleClick() {
         setSelected(!isSelected);
+        if (!isSelected) {
+            setMapCenter(location);
+            setMapLevel(3);
+            setFocusedPlace(AREA_NM);
+        }
     }
 
     /**

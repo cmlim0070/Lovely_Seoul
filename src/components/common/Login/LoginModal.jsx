@@ -13,7 +13,7 @@ export default function LoginModal() {
 
     /**
      * 사용자가 제출한 정보를 처리하고 로그인 절차를 실행
-     * @param {Event} e 제출 이벤트 (form의 submit 이벤트)
+     * @param {Event} e 제출 이벤트
      */
     const handleSubmit = (e) => {
         e.preventDefault();

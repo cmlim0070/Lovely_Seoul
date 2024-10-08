@@ -4,7 +4,7 @@ import { fetchAll } from "../utils/fetchAll";
 
 // 가장 인기있는 나잇대 정보 추가해서 전체 데이터 세팅
 export default function usePlaceData(placeLists) {
-    const { AllData, setAllData } = useAllData();
+    const { setAllData } = useAllData();
     useEffect(() => {
         try {
             if (placeLists && placeLists.row) {
@@ -16,6 +16,7 @@ export default function usePlaceData(placeLists) {
                             const ageData = [
                                 {
                                     age: "10대",
+
                                     rate: Number(population.PPLTN_RATE_10) || 0,
                                 },
                                 {
@@ -54,8 +55,6 @@ export default function usePlaceData(placeLists) {
             }
         } catch (err) {
             console.log(err);
-        } finally {
-            console.log("AllData : ", AllData);
         }
     }, [placeLists, setAllData]);
 }
