@@ -21,7 +21,9 @@ export default function FestivalList() {
                     );
                 })
             ) : (
-                <SearchEmptyList />
+                <div className="spinner">
+                    <BounceLoader color="#98e0ff" />
+                </div>
             )}
         </div>
     );

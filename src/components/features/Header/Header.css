@@ -1,17 +1,18 @@
 .header {
   box-sizing: border-box;
-  height: 100px;
+  height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 .header__left {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .header__right {
@@ -26,10 +27,13 @@
 }
 
 .search {
-  width: 540px;
+  width: 400px;
   height: 40px;
   background-color: #f4f7ff;
   border-radius: 10px;
+}
+.search__input {
+  display: flex;
 }
 .search input {
   border: none;

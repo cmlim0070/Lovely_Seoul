@@ -16,6 +16,7 @@ export default function usePlaceData(placeLists) {
                             const ageData = [
                                 {
                                     age: "10대",
+
                                     rate: Number(population.PPLTN_RATE_10) || 0,
                                 },
                                 {

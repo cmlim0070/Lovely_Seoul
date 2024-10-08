@@ -29,7 +29,7 @@ export default function ListContainer({ type }) {
                 {type === "favorite" ? (
                     <PlaceList type="favorite" />
                 ) : type === "place" ? (
-                    <PlaceList />
+                    <PlaceList type="all" />
                 ) : (
                     <FestivalList />
                 )}

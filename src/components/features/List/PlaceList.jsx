@@ -7,10 +7,9 @@ import useScrollRestoration from "../../../hooks/useScrollRestoration";
 import useAuth from "../../../store/useAuth";
 import useAllData from "../../../store/useAllData";
 import SearchEmptyList from "./SearchEmptyList";
-import useScroll from "../../../store/useScroll";
 
 export default function PlaceList({ type }) {
-    const { cardRefs, setCardRef } = useScroll;
+    const cardRefs = useRef([]);
     const { focusedPlace } = useFocus();
     const { username, userage } = useAuth();
     const { searchTerm } = useSearch();
@@ -70,18 +69,25 @@ export default function PlaceList({ type }) {
 
     // 마커 클릭한 쪽으로 스크롤 이동
     useEffect(() => {
-        if (focusedPlace !== null && AllData !== null) {
-            const index = AllData.findIndex(
-                (item) => item.area_nm === focusedPlace
-            );
-            if (index !== -1 && cardRefs.current[index]) {
-                cardRefs.current[index].scrollIntoView({ behavior: "smooth" });
+        if (type === "all") {
+            if (focusedPlace !== null && AllData !== null) {
+                const index = AllData.findIndex(
+                    (item) => item.area_nm === focusedPlace
+                );
+                if (index !== -1 && cardRefs.current[index]) {
+                    cardRefs.current[index].scrollIntoView({
+                        behavior: "smooth",
+                    });
 
-                const scrollY =
-                    cardRefs.current[index].getBoundingClientRect().top +
-                    window.scrollY;
-                sessionStorage.setItem("placeListScroll", scrollY);
-                console.log("Saving focused place scroll position:", scrollY);
+                    const scrollY =
+                        cardRefs.current[index].getBoundingClientRect().top +
+                        window.scrollY;
+                    sessionStorage.setItem("placeListScroll", scrollY);
+                    console.log(
+                        "Saving focused place scroll position:",
+                        scrollY
+                    );
+                }
             }
         }
     }, [focusedPlace, AllData]);
@@ -91,7 +97,12 @@ export default function PlaceList({ type }) {
             {dataToDisplay && dataToDisplay.length > 0 ? (
                 dataToDisplay.map((value, index) => {
                     return (
-                        <div key={index} ref={(el) => setCardRef(index, el)}>
+                        <div
+                            key={index}
+                            ref={(el) => {
+                                cardRefs.current[index] = el;
+                            }}
+                        >
                             <PlaceCard
                                 key={index}
                                 address={value.address}

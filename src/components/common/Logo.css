@@ -1,6 +1,4 @@
 .logo {
-    width: 170px;
-    &:hover {
-        cursor: pointer;
-    }
-} /*# sourceMappingURL=Logo.css.map */
+  width: 120px;
+  padding: 1rem;
+}/*# sourceMappingURL=Logo.css.map */
