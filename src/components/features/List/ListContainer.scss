@@ -33,6 +33,12 @@
         background-color: rgba(255, 255, 255, 0.1); /* 스크롤바 트랙 배경색 */
     }
 }
+
+.listcon__contentwrap__place {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 // .listcon__contentwrap__festival,
 // .listcon__contentwrap__place {
 //     // overflow: scroll;
@@ -98,4 +104,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.additionallist {
+    // height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.additionallist__title {
+    font-family: $font-noto-sans-kr;
+    font-size: 20px;
+    font-weight: $Bold;
+    padding: 1rem 0 1rem 0;
+}
+
+.additionallist__content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.additionallistitem {
+    display: flex;
+    background-color: rgb(234, 252, 255);
+    color: $seoul-blue;
+    border-radius: 20px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    &:hover {
+        background-color: rgb(95, 202, 221);
+        color: white;
+    }
+    &:active {
+        background-color: rgb(255, 226, 167);
+        transform: scale(0.95); // 클릭 시 크기 살짝 줄어드는 효과
+    }
 }

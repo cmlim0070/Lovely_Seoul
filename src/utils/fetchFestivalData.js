@@ -6,7 +6,7 @@ export const fetchFestivalData = async (placeName) => {
         import.meta.env.VITE_SEOUL_API_KEY
     }/json/citydata/1/5/${placeName}`;
     const fesURL = `/api/fetchFestivalData?placeName=${placeName}`;
-    const response = await ky.get(fesURL).json();
+    const response = await ky.get(localURL).json();
     console.log(placeName, " 문화행사 : ", response.CITYDATA.EVENT_STTS);
     return response.CITYDATA.EVENT_STTS;
 };
