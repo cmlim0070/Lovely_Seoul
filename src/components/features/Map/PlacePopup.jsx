@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
 import { CustomOverlayMap, MapMarker, useMap } from "react-kakao-maps-sdk";
-import ky from "ky";
 import useFocus from "../../../store/useFocus";
 import useFes from "../../../store/useFes";
-
 import "./KakaoMap.css";
 import FestivalPopup from "./FestivalPopup";
 import { fetchFestivalData } from "../../../utils/fetchFestivalData";
+import useAuth from "../../../store/useAuth";
 
 //개별 장소 마커 컨테이너
-export default function PlacePopup({ lat, lng, content }) {
+export default function PlacePopup({
+    lat,
+    lng,
+    content,
+    mostPopularAge,
+    congestion,
+}) {
     const map = useMap();
     const imgURL = `https://data.seoul.go.kr/SeoulRtd/images/hotspot/${content}.jpg`;
-
     const { focusedPlace, setFocusedPlace } = useFocus();
     const [isVisible, setIsVisible] = useState(false);
+    const [isAgeVisible, setIsAgeVisible] = useState(false);
+    const { isLoggedIn, userage } = useAuth();
     const { fesDataList, setfesDataList } = useFes();
 
     /**
@@ -45,9 +51,21 @@ export default function PlacePopup({ lat, lng, content }) {
         }
     }, [focusedPlace, content]);
 
+    // 로그인 유저 나잇대의 핫플레이스 정보 마커 오버레이 셋팅
+    useEffect(() => {
+        if (isLoggedIn) {
+            if (userage === mostPopularAge) {
+                setIsAgeVisible(true);
+            } else {
+                setIsAgeVisible(false);
+            }
+        }
+    }, [isLoggedIn, userage, mostPopularAge]);
+
     return (
         <>
             <MapMarker
+                className="mapmarker"
                 key={content}
                 position={{
                     lat: lat,
@@ -65,9 +83,6 @@ export default function PlacePopup({ lat, lng, content }) {
                             y: 30,
                         },
                     },
-                }}
-                style={{
-                    zIndex: 2,
                 }}
                 onClick={(marker) => {
                     handleClick();
@@ -93,6 +108,30 @@ export default function PlacePopup({ lat, lng, content }) {
                             <img src={imgURL} className="popup__img" />
                         </div>
                         <div className="popup__title">{content}</div>
+                    </div>
+                </CustomOverlayMap>
+            )}
+            {isAgeVisible && (
+                <CustomOverlayMap
+                    position={{
+                        lat: lat,
+                        lng: lng,
+                    }}
+                    zIndex={-1}
+                >
+                    <div className="signal-container">
+                        <div
+                            className="signal"
+                            style={{ backgroundColor: congestion }}
+                        ></div>
+                        <div
+                            className="signal"
+                            style={{ backgroundColor: congestion }}
+                        ></div>
+                        <div
+                            className="signal"
+                            style={{ backgroundColor: congestion }}
+                        ></div>
                     </div>
                 </CustomOverlayMap>
             )}

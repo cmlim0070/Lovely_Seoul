@@ -7,9 +7,9 @@ export const fetchPlacePopulationData = async (placeName) => {
     }/json/citydata_ppltn/1/5/${placeName}`;
     const url = `/api/fetchPlacePopulationData?placeName=${placeName}`;
     try {
-        const result = await ky.get(localURL).json();
-        // return result;
-        return result["SeoulRtd.citydata_ppltn"][0];
+        const result = await ky.get(url).json();
+        return result;
+        // return result["SeoulRtd.citydata_ppltn"][0];
     } catch (error) {
         console.error("Error fetching population data:", error);
         throw new Error(

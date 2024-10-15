@@ -44,17 +44,6 @@ export default function PlaceList({ type }) {
         return searchPlaceList(AllData, searchTerm);
     }, [AllData, searchTerm]);
 
-    // 검색 이후 필터 데이터가 0개(검색결과 없음)일 경우 카카오API에서 장소 검색해서 지도 이동 이벤트 제공
-    useEffect(() => {
-        if (filteredData && filteredData.length === 0) {
-            console.log("검색 결과 없음");
-            const ps = new window.kakao.maps.services.Places();
-            ps.keywordSearch("서울 " + searchTerm, callback);
-        } else {
-            setDisplayAdditional([false, null]);
-        }
-    }, [filteredData, searchTerm]);
-
     // 카카오 지도 API 검색용 콜백함수
     const callback = function (result, status) {
         if (status === window.kakao.maps.services.Status.OK) {
@@ -85,6 +74,17 @@ export default function PlaceList({ type }) {
             ),
         ];
     }, [type, filteredData, favoritefilteredData, userage]);
+
+    // 검색 이후 필터 데이터가 0개(검색결과 없음)일 경우 카카오API에서 장소 검색 후 결과 렌더링
+    useEffect(() => {
+        if (filteredData && filteredData.length === 0) {
+            console.log("검색 결과 없음");
+            const ps = new window.kakao.maps.services.Places();
+            ps.keywordSearch("서울 " + searchTerm, callback);
+        } else {
+            setDisplayAdditional([false, null]);
+        }
+    }, [filteredData, searchTerm]);
 
     // 마커 클릭한 쪽으로 스크롤 이동
     useEffect(() => {

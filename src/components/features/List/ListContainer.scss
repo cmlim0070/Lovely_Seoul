@@ -18,6 +18,8 @@
     // box-sizing: border-box;
     padding: 1rem;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
     // padding: 0.5rem;
     // overflow: hidden;
     &::-webkit-scrollbar {
@@ -99,8 +101,8 @@
 }
 
 .emptylist {
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,6 +112,7 @@
     // height: 100px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
 }
 
 .additionallist__title {
@@ -142,5 +145,22 @@
     &:active {
         background-color: rgb(255, 226, 167);
         transform: scale(0.95); // 클릭 시 크기 살짝 줄어드는 효과
+    }
+}
+.sortbutton__age__wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sortbutton__age {
+    background-color: rgb(215, 215, 215);
+    border-radius: 10px;
+
+    &.active {
+        background-color: #00aaff;
+        color: white;
+        border-color: #0077cc;
     }
 }
