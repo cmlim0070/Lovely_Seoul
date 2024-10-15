@@ -2,12 +2,12 @@
 $seoul-blue: #0087ca;
 $favorite-red: #bc1238;
 
-$age-10: #ffafa3;
-$age-20: #ffc470;
-$age-30: #ffd966;
-$age-40: #85e0a3;
-$age-50: #80caff;
-$age-60: #d9b8ff;
+$age-10: rgba(255, 175, 163, 0.2); // #ffafa3 -> rgba(255, 175, 163, 0.1)
+$age-20: rgba(255, 196, 112, 0.2); // #ffc470 -> rgba(255, 196, 112, 0.1)
+$age-30: rgba(255, 217, 102, 0.2); // #ffd966 -> rgba(255, 217, 102, 0.1)
+$age-40: rgba(133, 224, 163, 0.2); // #85e0a3 -> rgba(133, 224, 163, 0.1)
+$age-50: rgba(128, 202, 255, 0.2); // #80caff -> rgba(128, 202, 255, 0.1)
+$age-60: rgba(217, 184, 255, 0.2); // #d9b8ff -> rgba(217, 184, 255, 0.1)
 
 $gender-boy: #2b67f6 alpha 10%;
 $gender-girl: #f65751 alpha 10%;
@@ -76,8 +76,8 @@ $padding-thicker: 2rem;
     font-family: $font-noto-sans-kr;
     font-size: $Small;
     font-weight: $Bold;
-    color: white;
-    background-color: $bg-color;
+    // color: white;
+    // background-color: $bg-color;
     border-radius: 20px;
     box-sizing: border-box;
     padding: 0.5rem;

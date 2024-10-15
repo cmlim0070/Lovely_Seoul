@@ -51,11 +51,7 @@ export default function Header() {
                 <Logo />
                 <div className="search">
                     <div className="search__input">
-                        <input
-                            className="search"
-                            onChange={handleChange}
-                            onKeyDown={handleChange}
-                        />
+                        <input className="search" onChange={handleChange} />
                         <button></button>
                     </div>
                     <div className="search__button"></div>
